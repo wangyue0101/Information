@@ -129,6 +129,7 @@ class News(BaseModel, db.Model):
             "create_time": self.create_time.strftime("%Y-%m-%d %H:%M:%S"),
             "index_image_url": self.index_image_url,
             "clicks": self.clicks,
+            "author": self.user.to_dict() if self.user else None
         }
         return resp_dict
 
@@ -195,3 +196,4 @@ class Category(BaseModel, db.Model):
             "name": self.name
         }
         return resp_dict
+

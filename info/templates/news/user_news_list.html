@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>用户中心</title>
+	<link rel="stylesheet" type="text/css" href="../../static/news/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../../static/news/css/jquery.pagination.css">
+    <link rel="stylesheet" type="text/css" href="../../static/news/css/main.css">
+    <script type="text/javascript" src="../../static/news/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="../../static/news/js/jquery.pagination.min.js"></script>
+</head>
+<body class="inframe_body">
+    <div class="news_list">
+        <h3>新闻列表</h3>
+        <ul class="article_list">
+            {% for news in data.user_news_list %}
+                <li>
+                    {% if news.status == 0 %}
+                        {# 审核通过 #}
+                        <a href="/user/{{ news.id }}">{{ news.title }}</a>
+{#                        <a href="/news/{{ news.id }}">{{ news.title  }}</a>#}
+                        <em class="pass">已通过</em>
+                        <span>{{ news.create_time }}</span>
+                    {% elif news.status == 1 %}
+                        <a href="/user/{{ news.id }}">{{ news.title }}</a>
+{#                        <a href="javascript:;">{{ news.title }}</a>#}
+                        <em class="review">审核中</em>
+                        <span>{{ news.create_time }}</span>
+                    {% else %}
+                        <a href="/user/{{ news.id }}">{{ news.title }}</a>
+{#                        <a href="javascript:;">{{ news.title }}</a>#}
+                        <em class="nopass">审核未通过</em>
+                        <span>{{ news.create_time }}</span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        <div id="pagination" class="page"></div>
+        <script>
+            // 调用父页面的方法改变菜单指示
+            // window.parent.fnChangeMenu(2);
+
+            $(function(){
+                $("#pagination").pagination({
+                    currentPage: {{ data.page }},
+                    totalPage: {{ data.totalpage }},
+                    callback: function(current) {
+                        alert('ok!');
+                        window.location.href="/user/news_list?page=" + current
+                    }
+                });
+            });
+        </script>
+       
+    </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{% extends "news/base.html" %}
+
+{% block titleblock %}
+    <title>首页-新经资讯</title>
+{% endblock %}
+{% block scriptblock %}
+    <script type="text/javascript" src="../../static/news/js/index.js"></script>
+{% endblock %}
+{% block categoeyblock %}
+    <ul class="menu fl">
+                {% for ctgory in data.category_news %}
+                    <li class="{% if loop.index0 == 0 %} active {% endif %}"
+                        data-cid="{{ loop.index }}">
+                        <a href="javascript:;">{{ ctgory.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+{% endblock %}
+{% block contentblock %}
+        <ul class="list_con fl">
+        </ul>
+{% endblock %}

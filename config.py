@@ -13,13 +13,14 @@ class Config(object):
 
     # 设置将SESSION保存到服务器中
     SESSION_TYPE = "redis"
-    SESSION_REDIS = StrictRedis(host=HOST, port=PORT, decode_responses=True)
+    SESSION_REDIS = StrictRedis(host=HOST, port=PORT)
     SESSION_USE_SIGNER = True
     SESSION_PERMANENT = False
     PERMANENT_SESSION_LIFETIME = 60 * 60 * 24 * 7
 
     # 链接MYSQL的配置
     SQLALCHEMY_DATABASE_URI = "mysql+mysqldb://root:python@127.0.0.1:3306/information?charset=utf8"
+    SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
